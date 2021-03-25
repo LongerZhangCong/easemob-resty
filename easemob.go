@@ -99,7 +99,7 @@ func (em *EM) excute(request *resty.Request, method, url string) (*resty.Respons
 
 func (em *EM) refreshToken() bool {
 	em.Lock()
-	em.Unlock()
+	defer em.Unlock()
 	resp, _ := resty.New().SetDebug(true).R().
 		SetBody(map[string]string{
 			`grant_type`:    `client_credentials`,
